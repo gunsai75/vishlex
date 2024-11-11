@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Home Page</title>
+    <style>
+        form {
+            padding: 30px;
+        }
+        #user_text1 {
+            width: 75%;
+        }
+        #user_text2 {
+            width: 75%;
+        }
+
+        #source_language {
+            width: 15%;
+            height: 30px;
+        }
+
+        #target_language {
+            width: 15%;
+            height: 30px;
+        }
+
+        button {
+            width: 90.5%;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+
+        form {
+            margin-top: 20px;
+            border: 1px solid black;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- form -->
+    <form method="POST" id="form" action="/translate">
+        
+        <!-- source language text -->
+        <label for="user_text1">Enter Text: </label><br>
+        <input type="text" id="user_text1" name="source_text" placeholder="Enter text"/>
+        
+        <!-- dropdown for source language-->
+        <select name="source_language" id="source_language">
+            {% for language_id, language in result1.items() %}
+                <option value="{{ language_id }}">{{ language }}</option>
+            {% endfor %}
+        </select>
+        
+        <!-- break -->
+        <br><br>
+        
+        <!-- target language text -->
+        <label for="user_text2">Enter Text: </label><br>
+        <input type="text" id="user_text2" name="target_text" placeholder="Enter text"/>
+
+        <!-- target language dropdown -->
+        <select name="target_language" id="target_language">
+            {% for language_id, language in result2.items() %}
+                <option value="{{ language_id }}">{{ language }}</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+{% endblock %}
