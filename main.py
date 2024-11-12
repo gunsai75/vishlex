@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, jsonify
-import vishlex
+import evaluation_functions
 
 app = Flask(__name__)
 
@@ -78,26 +78,35 @@ def home_page():
     context2 = TARGET_LANGUAGES
     return render_template("home.html", result1=context1, result2=context2)
 
-@app.route("/translate", methods=['POST', 'GET'])
+@app.route("/scores", methods=['POST', 'GET'])
 def translate():
     if request.method == "POST":
         try:
-            source_text = request.form.get("source_text")
+            source_text = request.form.get("source_text") # A
             source_language = request.form.get("source_language")
 
-            target_text = request.form.get("target_text")
+            target_text = request.form.get("target_text") # B
             target_language = request.form.get("target_language")
 
-            text_a = vishlex.fetch_translation(source_text, target_language)
+            text_a = evaluation_functions.fetch_translation(source_text, target_language) # A prime
             
             if source_language == "EN":
                 source_language = "EN-US"
             
-            text_b = vishlex.fetch_translation(target_text, source_language)
+            text_b = evaluation_functions.fetch_translation(target_text, source_language) # B prime
+
+            # A v B prime
+            # B v A prime
             
-            scores = vishlex.calc_score(source_text, target_text, text_a, text_b)
-            scores = jsonify(scores)
-            return scores
+            scores = evaluation_functions.calc_score(source_text, target_text, text_a, text_b)
+
+            if(scores["aggregate_quality_score"] > 0.75):
+                result = "Good Translation"
+            elif(scores["aggregate_quality_score"] > 0.50 and scores["aggregate_quality_score"] < 0.75):
+                result = "Ok but can be improved"
+            else:
+                result = "Bad translation"
+            return render_template("scores.html", scores_data=scores, final_result = result)
         
         except Exception as e:
             return jsonify({"error": str(e)}), 500

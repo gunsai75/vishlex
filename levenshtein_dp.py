@@ -2,7 +2,6 @@ import gensim.downloader as api
 import numpy as np
 from nltk.metrics import edit_distance
 from sklearn.metrics.pairwise import cosine_similarity
-import string
 
 # Load a pre-trained word2vec model
 word2vec_model = api.load("word2vec-google-news-300")
