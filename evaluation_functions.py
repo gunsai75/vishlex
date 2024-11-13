@@ -8,6 +8,7 @@ import levenshtein_dp
 import deepl
 import bert
 
+# API KEY
 DEEPL_API_KEY = r""
 
 def fetch_translation(sourceText, targetLang):
