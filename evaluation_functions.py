@@ -73,8 +73,8 @@ def calc_score(A, B, A_prime, B_prime):
     met_B_A_prime = calculate_meteor_score(B, A_prime)
 
     # Levenshtein score
-    l_A_B_prime = levenshtein_dp.levenshtein_with_embeddings(A, B_prime)
-    l_B_A_prime = levenshtein_dp.levenshtein_with_embeddings(B, A_prime)
+    l_A_B_prime = levenshtein_dp.normalized_levenshtein_with_embeddings(A, B_prime)
+    l_B_A_prime = levenshtein_dp.normalized_levenshtein_with_embeddings(B, A_prime)
 
     # BERT score
     b_A_B_prime = bert.bert_similarity(A, B_prime)
@@ -87,6 +87,7 @@ def calc_score(A, B, A_prime, B_prime):
         "meteor_score": (met_A_B_prime + met_B_A_prime) / 2,
         "levenshtein_score": (l_A_B_prime + l_B_A_prime) / 2,
         "bert_score": (b_A_B_prime + b_B_A_prime) / 2
+        # "levenshtein_similarity": (lev_dist_A_B_prime + lev_dist_B_A_prime) / 2,
         # "embedding_similarity": (embedding_similarity_A_B_prime + embedding_similarity_B_A_prime) / 2
     }
     scores["aggregate_quality_score"] = sum(scores.values()) / len(scores)

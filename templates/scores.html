@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: arial, sans-serif;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+  <h1>Scores Table</h1>
+  <table border="1">
+      <thead>
+          <tr>
+              <th>Subject</th>
+              <th>Score</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for Evaluation, Analysis in scores_data.items() %}
+              <tr>
+                  <td>{{ Evaluation }}</td>
+                  <td>{{ Analysis }}</td>
+              </tr>
+          {% endfor %}          
+      </tbody>
+  </table>
+  <p><strong>Aggregate Score:</strong> {{ final_result }}</p>
+  <a href="/">Back to the Main Page</a>
+</body>
+</html>
