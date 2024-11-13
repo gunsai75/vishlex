@@ -3,6 +3,8 @@ import evaluation_functions
 
 app = Flask(__name__)
 
+# Edit the API key in evaluation_functions.py
+
 SOURCE_LANGUAGES = {
     "AR": "Arabic",
     "BG": "Bulgarian",
