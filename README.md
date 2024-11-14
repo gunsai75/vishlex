@@ -45,7 +45,7 @@ Run the below line in the terminal to install the required libraries:
 ```
 pip install -r "requirements.txt"
 ```
-To run the program type tge following in the terminal:
+To run the program type the following in the terminal:
 ```
 python main.py
 ```
