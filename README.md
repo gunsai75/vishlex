@@ -14,8 +14,8 @@ Requirements
   - Create a machine translation of the source text.
   - Back-translate the human translation into the original language.
   ```mermaid
-  Source Text (A) --> Machine Translation (B);
-  Human Translation (A') --> Back Translation (B'); 
+  A --> B;
+  A_prime --> B_prime; 
   ```
  ### Text Comparison:
  - Compare the source text with the back-translation.
