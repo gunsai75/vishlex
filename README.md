@@ -45,9 +45,15 @@ Run the below line in the terminal to install the required libraries:
 ```
 pip install -r "requirements.txt"
 ```
+You might want to run the following line in the **Python Interactive Shell** after executing the previous step
+```
+nltk.download('punkt')
+nltk.download('wordnet')
+```
 To run the program type the following in the terminal:
 ```
 python main.py
 ```
+
 
 ------- WIP ---------

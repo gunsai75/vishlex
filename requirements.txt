@@ -1,0 +1,5 @@
+flask
+deepl
+scikit-learn
+rouge-score
+nltk
