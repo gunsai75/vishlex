@@ -1,6 +1,5 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import sacrebleu
 from rouge_score import rouge_scorer
 from nltk.translate.meteor_score import meteor_score
 from nltk.translate.bleu_score import SmoothingFunction, sentence_bleu
@@ -29,10 +28,6 @@ def calculate_cosine_similarity(text1, text2):
     
     # Return the similarity score
     return cosine_sim[0][0]
-
-# def bleu_score(text1, text2):
-#     score_bleu = sacrebleu.corpus_bleu([text2], [[text1]]).score
-#     return score_bleu
 
 # BLEU score
 def bleu_score(text1, text2):
@@ -82,12 +77,12 @@ def calc_score(A, B, A_prime, B_prime):
     b_B_A_prime = bert.bert_similarity(B, A_prime)
 
     scores = {
-        "cosine_similarity": (cosine_A_B_prime + cosine_B_A_prime) / 2,
-        "rouge_score": (rouge_A_B_prime + rouge_B_A_prime) / 2,
-        "bleu_score": (bleu_A_B_prime + b_B_A_prime) / 2,
-        "meteor_score": (met_A_B_prime + met_B_A_prime) / 2,
-        "levenshtein_score": (l_A_B_prime + l_B_A_prime) / 2,
-        "bert_score": (b_A_B_prime + b_B_A_prime) / 2
+        "Cosine Similarity": (cosine_A_B_prime + cosine_B_A_prime) / 2,
+        "Rouge Score": (rouge_A_B_prime + rouge_B_A_prime) / 2,
+        "BLEU Score": (bleu_A_B_prime + bleu_B_A_prime) / 2,
+        "METEOR Score": (met_A_B_prime + met_B_A_prime) / 2,
+        "Levenshtein Distance (normalized)": (l_A_B_prime + l_B_A_prime) / 2,
+        "BERT Score": (b_A_B_prime + b_B_A_prime) / 2
         # "levenshtein_similarity": (lev_dist_A_B_prime + lev_dist_B_A_prime) / 2,
         # "embedding_similarity": (embedding_similarity_A_B_prime + embedding_similarity_B_A_prime) / 2
     }

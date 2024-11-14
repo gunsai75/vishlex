@@ -67,7 +67,7 @@ def normalized_levenshtein_with_embeddings(str1, str2):
     return 1 - normalized_distance
 
 
-# Example usage
+# TEST Example usage
 # str1 = "The cat sat comfortably on the windowsill, basking in the warm sunlight."
 # str2 = "The cat lounged on the window ledge, enjoying the warmth of the sun."
 
