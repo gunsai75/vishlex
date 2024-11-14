@@ -7,15 +7,20 @@ import levenshtein_dp
 import deepl
 import bert
 
+# Files for BERT (bert.py) and Levenshtein distance (levenshtein_dp.py) exist in the same directory 
+# This file contains the code for translation, comparision, and evaluation
+
 # API KEY
 DEEPL_API_KEY = r""
 
+# Function to fetch translation using DeepL API
 def fetch_translation(sourceText, targetLang):
     """Fetch translation using DeepL API."""
     translator = deepl.Translator(DEEPL_API_KEY)
     result = translator.translate_text(sourceText, target_lang=targetLang).text
     return result.lower()
 
+# Cosine Similarity 
 def calculate_cosine_similarity(text1, text2):
     # Create a TF-IDF vectorizer
     vectorizer = TfidfVectorizer()
@@ -38,18 +43,39 @@ def bleu_score(text1, text2):
     score_bleu = sentence_bleu([reference], candidate, smoothing_function=smoothie)
     return score_bleu
 
+# ROUGE score
 def calculate_rouge_score(ref, hyp):
     scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
     scores = scorer.score(ref, hyp)
     f1m = scores['rougeL'].fmeasure # RougeL's fmeasure score for more a comprehensive score of similarity
     return f1m
 
+# METEOR score
 def calculate_meteor_score(ref, hyp):
     ref_tokens = ref.split()
     hyp_tokens = hyp.split()
 
     score = meteor_score([ref_tokens], hyp_tokens)
     return score
+
+# Calculating all the scores using this function
+# We pass 4 parameters
+"""
+Source Text (A) --> Machine Translation (A')
+Human Translation (B) --> Back Translation (B')
+
+Source Translation (A) VS Back Translation (B')
+Machine Translation (B) VS Human Translation (A')
+
+Args:-
+A - Source Text
+B - Human Translation
+A_prime - Machine Translation
+B_prime - Back Translation (of the Human Translation)
+
+Returns:-
+dictionary: all the scores
+"""
 
 def calc_score(A, B, A_prime, B_prime):
     # Cosine Similarity
@@ -83,8 +109,6 @@ def calc_score(A, B, A_prime, B_prime):
         "METEOR Score": (met_A_B_prime + met_B_A_prime) / 2,
         "Levenshtein Distance (normalized)": (l_A_B_prime + l_B_A_prime) / 2,
         "BERT Score": (b_A_B_prime + b_B_A_prime) / 2
-        # "levenshtein_similarity": (lev_dist_A_B_prime + lev_dist_B_A_prime) / 2,
-        # "embedding_similarity": (embedding_similarity_A_B_prime + embedding_similarity_B_A_prime) / 2
     }
     scores["aggregate_quality_score"] = sum(scores.values()) / len(scores)
 

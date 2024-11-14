@@ -74,13 +74,15 @@ TARGET_LANGUAGES = {
     "ZH-HANT": "Chinese (traditional)"
 }
 
-@app.route("/")
+# Home page
+@app.route("/")  # home.html
 def home_page():
     context1 = SOURCE_LANGUAGES
     context2 = TARGET_LANGUAGES
     return render_template("home.html", result1=context1, result2=context2)
 
-@app.route("/scores", methods=['POST', 'GET'])
+# Processing the translations and getting the output
+@app.route("/scores", methods=['POST', 'GET']) # scores.html
 def translate():
     if request.method == "POST":
         try:
@@ -102,6 +104,7 @@ def translate():
             
             scores = evaluation_functions.calc_score(source_text, target_text, text_a, text_b)
 
+            # conditional statements to decide on the final evaluation
             if(scores["aggregate_quality_score"] > 0.75):
                 result = "Good Translation"
             elif(scores["aggregate_quality_score"] > 0.50 and scores["aggregate_quality_score"] < 0.75):
