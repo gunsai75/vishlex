@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, redirect, jsonify
+from flask import Flask, request, render_template, jsonify
 import evaluation_functions
+# evaluation_functions.py contains the translation and comparision functions
 
 app = Flask(__name__)
 
