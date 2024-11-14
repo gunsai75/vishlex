@@ -15,8 +15,8 @@ Requirements
   - Back-translate the human translation into the original language.
   ```mermaid
   graph TD;
-  Source Text (A) --> Machine Translation (B);
-  Human Translation (A') --> Back Translation (B'); 
+    "Source Text (A)" --> "Machine Translation (B)";
+    "Human Translation (A')" --> "Back Translation (B')"; 
   ```
  ### Text Comparison:
  - Compare the source text with the back-translation.
