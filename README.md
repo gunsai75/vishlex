@@ -38,7 +38,7 @@ We calculated the aggregate score by taking the mean value of all the scores.
 # Why the DeepL API?
 DeepL is known for its accuracy and natural, human-like translations, especially for European languages, making it suitable for assessing nuanced translation quality.
 
-DeepL’s advanced AI handles idioms, tone, and context better than many alternatives, providing translations that are closer to human interpretation.
+DeepL's advanced AI handles idioms, tone, and context better than many alternatives, providing translations that are closer to human interpretation.
 
 # Running the Program
 Run the below line in the terminal to install the required libraries:
